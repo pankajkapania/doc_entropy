@@ -1,0 +1,82 @@
+=Working Title: "The Entropy/Naturalness of Software Documentation"=
+
+==Research Questions==
+
+We expect the cross-entropy of the the following to be in decreasing order
+
+#English text
+#Documentation
+#Source code of API
+#CE found in Docs
+
+==Motivation==
+If programmers writing code are repetitive and predictable, I would
+bet that questions and answers (and to a lesser extent, formal
+documentation) about code are even more repetitive and predictable
+because people tend to ask and answer the same questions repeatedly
+(ie people learn in similar ways). The entropy comparison that I
+would like to see/do is not between general English and code or even
+among programs, but between the (informal) documentation of an API and
+the programs that use the API. Given that there is English as well as
+code fragments in documentation, I would suspect that documentation
+would have higher entropy than source code. However, if we use ACER to
+extract the code elements and ignore the English text, I would suspect
+that source code would have a higher entropy than code elements in
+documentation. In effect, I hypothesize that the English between the
+code elements is obscuring the repetitive and simple nature of the
+topics covered by the documentation.
+
+==For Peter==
+
+*Find data sets and project to examine
+* Get postgres converted for so
+* create ACE git repo
+
+==For next meeting==
+
+*download latest [http://www.clearbits.net/torrents/2141-jun-2013 stackoverflow torrent]
+*Make rigbypc a collaborator on your github repo call doc_entropy 
+*Read references and find other papers
+*Get the entropy calculators from Abram and Josh (should be in github)
+
+==Important References==
+
+* "On the Naturalness of Software" Hindle2012ICSE
+**Look at citations of this paper on google scholar
+* scam2013_submission_20
+* "Discovering Essential Code Elements in Informal Documentation" RR2013ICSE
+* Do a literature search
+
+==July 2 to July 9==
+
+
+==June 27, 2013==
+
+*on vaccation until 2nd
+*get user account on rice
+
+==Preliminary evidence==
+
+Some preliminary evidence from HttpClient: Documentation covers the
+same code elements in multiple documents. While the mailing list
+covers the most distinct code elements, documentation in general
+covers a limited set of features provided by an API.
+
+<pre>
+kind_Id -> 2=class, 5=method, 8=field
+
+ doc_name    | kind_id | distinct_ce | total_ce
+---------------+---------+-------------+----------
+ clienttut     |       2 |         115 |      602
+ clienttut     |       5 |         165 |      436
+ clienttut     |       8 |          33 |       61
+ coretut       |       2 |         140 |      724
+ coretut       |       5 |         260 |      503
+ coretut       |       8 |          12 |       40
+ stackoverflow |       2 |         115 |     2471
+ stackoverflow |       5 |         218 |     2281
+ stackoverflow |       8 |          54 |      254
+ usermail      |       2 |         255 |     3898
+ usermail      |       5 |         460 |     3441
+ usermail      |       8 |          94 |      485
+</pre>
