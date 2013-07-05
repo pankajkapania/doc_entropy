@@ -48,6 +48,7 @@ topics covered by the documentation.
 * Do a literature search
 
 ==July 2 to July 9==
+* got the link of entropy calculator : https://github.com/orezpraw/unnaturalcode.
 
 
 ==June 27, 2013==
