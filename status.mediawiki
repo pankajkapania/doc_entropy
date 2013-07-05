@@ -34,10 +34,11 @@ topics covered by the documentation.
 
 ==For next meeting==
 
+*Test on [http://git.apache.org/ Apache Lucene] make sure it's java
+** Run Abram's tool on source code
+
 *download latest [http://www.clearbits.net/torrents/2141-jun-2013 stackoverflow torrent]
-*Make rigbypc a collaborator on your github repo call doc_entropy 
 *Read references and find other papers
-*Get the entropy calculators from Abram and Josh (should be in github)
 
 ==Important References==
 
@@ -51,8 +52,6 @@ topics covered by the documentation.
 * Created repo and added rigbypc as collaborater.
 * got the link of entropy calculator : https://github.com/orezpraw/unnaturalcode.
 * Downloading is in progress for stackflow torrent.
-
-
 
 ==June 27, 2013==
 
