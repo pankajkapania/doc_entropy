@@ -53,6 +53,17 @@ topics covered by the documentation.
 * got the link of entropy calculator : https://github.com/orezpraw/unnaturalcode.
 * Downloading is in progress for stackflow torrent.
 
+==July 11 ===
+* Started stackflow torrent on rice. it's under /home/pankaj_k/Downloads directory.
+* Started working on tool Abram's tool.
+   * Tool installation requires building(GIT cloning) of 3-4 APIs(JZMQ, MITLM, ANTLR, PERL Modules).
+       * Installation of tool is completed.(faced few issues while building it).
+   * Running of tool requires 3 steps.
+      1) Run java lexer.(Done.)
+      2) Run Server. (InProgress, facing few issues here.)
+      3) Run Client. (Not Started yet.)
+
+
 ==June 27, 2013==
 
 *on vaccation until 2nd
