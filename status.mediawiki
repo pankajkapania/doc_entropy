@@ -55,7 +55,7 @@ topics covered by the documentation.
 
 ==July 11 ==
 * Started stackflow torrent on rice. it's under /home/pankaj_k/Downloads directory.
-* Started working on tool Abram's tool.
+* Started working on Abram's tool.
    * Tool installation requires building(GIT cloning, make, install etc.) of 3-4 APIs(JZMQ, MITLM, ANTLR, PERL Modules).
        * Installation of tool is completed.(faced few issues while building it).
    * Running of tool requires 3 steps.
