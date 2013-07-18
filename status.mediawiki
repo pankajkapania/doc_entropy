@@ -50,7 +50,7 @@ topics covered by the documentation.
 
 ==July 2 to July 9==
 * Created repo and added rigbypc as collaborater.
-* got the link of entropy calculator : https://github.com/orezpraw/unnaturalcode.
+* got the link of entropy calculator : https://github.com/orezpraw/unnaturalcode
 * Downloading is in progress for stackflow torrent.
 
 ==July 10-11-12 ==
