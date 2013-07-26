@@ -55,9 +55,11 @@ topics covered by the documentation.
 * "Discovering Essential Code Elements in Informal Documentation" RR2013ICSE
 * Do a literature search
 
-==July 19, 2013==
+==July 19-26, 2013==
 
-*what did you do?
+* Run the tutorial of MITLM.
+* Read the paper and researched futher on Method section of ICSE PAPER.
+* Prepared one Document on my findings.
 
 ==July 2 to July 9==
 * Created repo and added rigbypc as collaborater.
