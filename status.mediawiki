@@ -34,6 +34,10 @@ topics covered by the documentation.
 
 ==For next meeting==
 
+# Turn SO posts for lucene into token file
+# Create token file for CEs 
+# Run them through MitLM and replicate Figure 1 from Hindle2012ICSE
+
 * Do tutorial of [https://code.google.com/p/mitlm/wiki/Tutorial mitlm]
 ** Be able to feed it normal english text
 ** interpret the output
