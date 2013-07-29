@@ -38,6 +38,24 @@ topics covered by the documentation.
 # Create token file for CEs 
 # Run them through MitLM and replicate Figure 1 from Hindle2012ICSE
 
+
+
+==Important References==
+
+* "On the Naturalness of Software" Hindle2012ICSE
+**Look at citations of this paper on google scholar
+* scam2013_submission_20
+* "Discovering Essential Code Elements in Informal Documentation" RR2013ICSE
+* Do a literature search
+
+== July 27 - August 2nd ==
+
+
+==July 19-26, 2013==
+
+* Run the tutorial of MITLM.
+* Read the paper and researched futher on Method section of ICSE PAPER.
+* Prepared one Document on my findings.
 * Do tutorial of [https://code.google.com/p/mitlm/wiki/Tutorial mitlm]
 ** Be able to feed it normal english text
 ** interpret the output
@@ -50,20 +68,6 @@ topics covered by the documentation.
 
 *download latest [http://www.clearbits.net/torrents/2141-jun-2013 stackoverflow torrent]
 *Read references and find other papers
-
-==Important References==
-
-* "On the Naturalness of Software" Hindle2012ICSE
-**Look at citations of this paper on google scholar
-* scam2013_submission_20
-* "Discovering Essential Code Elements in Informal Documentation" RR2013ICSE
-* Do a literature search
-
-==July 19-26, 2013==
-
-* Run the tutorial of MITLM.
-* Read the paper and researched futher on Method section of ICSE PAPER.
-* Prepared one Document on my findings.
 
 ==July 2 to July 9==
 * Created repo and added rigbypc as collaborater.
