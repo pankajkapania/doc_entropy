@@ -28,7 +28,7 @@ topics covered by the documentation.
 
 ==For Peter==
 
-*Find data sets and project to examine
+* Find data sets and project to examine
 * Get postgres converted for so
 * create ACE git repo
 
@@ -69,10 +69,7 @@ topics covered by the documentation.
 *download latest [http://www.clearbits.net/torrents/2141-jun-2013 stackoverflow torrent]
 *Read references and find other papers
 
-==July 2 to July 9==
-* Created repo and added rigbypc as collaborater.
-* got the link of entropy calculator : https://github.com/orezpraw/unnaturalcode
-* Downloading is in progress for stackflow torrent.
+
 
 ==July 10-11-12 ==
 * Started stackflow torrent on rice. it's under /home/pankaj_k/Downloads directory.
@@ -83,6 +80,12 @@ topics covered by the documentation.
       1) Run java lexer.(Done.)
       2) Run Server. (InProgress, facing few issues here.)
       3) Run Client. (Not Started yet.)
+
+
+==July 2 to July 9==
+* Created repo and added rigbypc as collaborater.
+* got the link of entropy calculator : https://github.com/orezpraw/unnaturalcode
+* Downloading is in progress for stackflow torrent.
 
 
 ==June 27, 2013==
