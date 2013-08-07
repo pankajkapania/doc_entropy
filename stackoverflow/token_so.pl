@@ -29,38 +29,19 @@ my $dbh_ref = DBI->connect("dbi:Pg:database=$config{db_name}", '', '', {AutoComm
 
 if($config{doc_type} eq 'stackoverflow') {
 
-    #instead of old query above which modifies stackoverflow tables, we union the parents and the children (parents don't have a parentid) 
-#    my $get_du = $dbh_ref->prepare(qq[
-#                  select parentid, id, title, body, msg_date from                                                                                                                                                              
-#                  (select id as parentid, id, title, body, to_timestamp(creationdate) as msg_date from posts 
-#                    where id in (select id from posts where tags ~ E'lucene') --the parents                                                                
-#                  union select parentid, id, title, body, to_timestamp(creationdate) as msg_date from posts 
-#                    where parentid in (select id from posts where tags ~ E'lucene') --the children                                                    
-#                    ) as r 
-#                  order by parentid, msg_date asc
-#                  ]);
-#
-
-
-    #test -#                  select parentid, id, title, body, to_timestamp(creationdate) as msg_date from posts where id = '2083588'];
-
-    #lucene is implemented in all kinds of languages, so need complex regexp
-    my $q = q[
-                  select parentid, id, title, body, msg_date from 
-                  (select id as parentid, id, title, body, to_timestamp(creationdate) as msg_date from posts 
-                    where id in (select id from posts where tags ~ E'lucene' and (tags ~ E'java' or tags !~ E'net|c#|php|nhibernate|zend|clucene|ruby|c\\\\+\\\\+|pylucene|python|rails')) 
-                  union select parentid, id, title, body, to_timestamp(creationdate) as msg_date from posts 
-                    where parentid in (select id from posts where tags ~ E'lucene' and (tags ~ E'java' or tags !~ E'net|c#|php|nhibernate|zend|clucene|ruby|c\\\\+\\\\+|pylucene|python|rails')) 
-                    ) as r 
-                  order by parentid, msg_date asc
-                  ];
+    #Just going to use the ones we found code elements in
+    my $q = q[select id, title, body 
+		from posts p, 
+			(select cast(du as integer) as du from clt where trust = 0 and kind <> 'variable' group by du) as c 
+		where c.du = p.id
+	     ];
 
     my $get_du = $dbh_ref->prepare($q);
 
     $get_du->execute or die "Can't get doc units from db ", $dbh_ref->errstr;
 
     #Stackoverflow
-    while ( my($tid, $du, $title, $content) = $get_du ->fetchrow_array) {
+    while ( my($du, $title, $content) = $get_du ->fetchrow_array) {
 
         if(defined $title) {
             $content = $title . ' ' . $content;

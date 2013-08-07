@@ -1,8 +1,8 @@
 
 ./token_so.pl <configfile>
-* run this to get all the posts from stackoverflow related to a tag
+* run this to get all the posts from stackoverflow related that are in the clt table
 * new lines are removed from posts, but there is a black line between each post so that the end of one post is not considered in the > 1-gram of another post
 
 ./token_so_ce.pl <config_file>
-* pulls out the code elements based on their doc position and places a space between each post
+* pulls out the code elements based on their doc position and places a space between code elements and a new line between each post
 

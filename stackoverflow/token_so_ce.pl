@@ -41,7 +41,7 @@ while ( my ($du, $pqn, $simple, $kind) = $get_du ->fetchrow_array) {
         $ce = "$pqn.$simple";
     }
 
-    print " $ce ";
+    print "$ce ";
 
     $du_old = $du;
 }
