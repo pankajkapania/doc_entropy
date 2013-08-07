@@ -10,21 +10,20 @@ We expect the cross-entropy of the the following to be in decreasing order
 #CE found in Docs
 
 ==Motivation==
-If programmers writing code are repetitive and predictable, I would
-bet that questions and answers (and to a lesser extent, formal
-documentation) about code are even more repetitive and predictable
-because people tend to ask and answer the same questions repeatedly
-(ie people learn in similar ways). The entropy comparison that I
-would like to see/do is not between general English and code or even
-among programs, but between the (informal) documentation of an API and
-the programs that use the API. Given that there is English as well as
-code fragments in documentation, I would suspect that documentation
-would have higher entropy than source code. However, if we use ACER to
-extract the code elements and ignore the English text, I would suspect
-that source code would have a higher entropy than code elements in
-documentation. In effect, I hypothesize that the English between the
-code elements is obscuring the repetitive and simple nature of the
-topics covered by the documentation.
+
+If programmers writing code are repetitive and predictable, I would bet that
+questions and answers (and to a lesser extent, formal documentation) about code
+are even more repetitive and predictable because people tend to ask and answer
+the same questions repeatedly (ie people learn in similar ways). The entropy
+comparison that I would like to see/do is not between general English and code
+or even among programs, but between the (informal) documentation of an API and
+the programs that use the API. Given that there is English as well as code
+fragments in documentation, I would suspect that documentation would have
+higher entropy than source code. However, if we use ACER to extract the code
+elements and ignore the English text, I would suspect that source code would
+have a higher entropy than code elements in documentation. In effect, I
+hypothesize that the English between the code elements is obscuring the
+repetitive and simple nature of the topics covered by the documentation.
 
 ==For Peter==
 
@@ -34,7 +33,11 @@ topics covered by the documentation.
 
 ==For next meeting==
 
-
+* put scripts into stackoverflow/ and update README
+* start writing the paper
+** put in related work
+** etc
+* get more data from so to run through mitlm and 10 fold cross validation
 
 
 
