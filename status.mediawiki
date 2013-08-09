@@ -33,11 +33,10 @@ repetitive and simple nature of the topics covered by the documentation.
 
 ==For next meeting==
 
-* put scripts into stackoverflow/ and update README
 * start writing the paper
 ** put in related work
 ** etc
-* get more data from so to run through mitlm and 10 fold cross validation
+
 
 
 
@@ -48,6 +47,11 @@ repetitive and simple nature of the topics covered by the documentation.
 * scam2013_submission_20
 * "Discovering Essential Code Elements in Informal Documentation" RR2013ICSE
 * Do a literature search
+
+== August 7th - 15th ==
+* put scripts into stackoverflow/ and update README - Done.
+* get more data from so to run through mitlm and 10 fold cross validation - Done.
+
 
 == July 27 - August 6th ==
 # Turn SO posts for lucene into token file
