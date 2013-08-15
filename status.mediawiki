@@ -33,9 +33,8 @@ repetitive and simple nature of the topics covered by the documentation.
 
 ==For next meeting==
 
-* start writing the paper
-** put in related work
-** etc
+* continue writing the paper as discussed
+* if you have time take a look at extracting the Eclipse AST from the MSR paper's git project that use lucene
 
 
 
