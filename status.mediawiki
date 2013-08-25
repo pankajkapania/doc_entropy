@@ -47,6 +47,12 @@ repetitive and simple nature of the topics covered by the documentation.
 * "Discovering Essential Code Elements in Informal Documentation" RR2013ICSE
 * Do a literature search
 
+
+== August 16th - 23rd==
+* completed the paper.
+* Tried alot examples on AST. but it was a tall order on extracting the elements using AST in a desired way. 
+
+
 == August 7th - 15th ==
 * put scripts into stackoverflow/ and update README - Done.
 * get more data from so to run through mitlm and 10 fold cross validation - Done.
