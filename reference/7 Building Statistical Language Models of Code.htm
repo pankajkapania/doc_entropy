@@ -1,0 +1,389 @@
+
+<!-- saved from url=(0114)http://scholar.googleusercontent.com/scholar?q=cache:n5KIAGLkcNcJ:scholar.google.com/&hl=en&as_sdt=2005&sciodt=1,5 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--<base href="http://qnap1030.avt.com/icsews13dapse/p1-schulam.pdf">--><base href="."></head><body bgcolor="#ffffff" vlink="blue" link="blue"><div style="background:#fff;border:1px solid #999;margin:-1px -1px 0;padding:0;"><div style="background:#ddd;border:1px solid #999;color:#000;font:13px arial,sans-serif;font-weight:normal;margin:12px;padding:8px;text-align:left">This is the html version of the file <a href="http://qnap1030.avt.com/icsews13dapse/p1-schulam.pdf"><font color="blue">http://qnap1030.avt.com/icsews13dapse/p1-schulam.pdf</font></a>.<br><b>Google</b> automatically generates html versions of documents as we crawl the web.</div></div><div style="position:relative">
+
+
+<meta name="CreationDate" content="D:20130423113708+02&#39;00&#39;">
+<meta name="Author" content="Peter Schulam, Roni Rosenfeld, and Premkumar Devanbu">
+<meta name="Subject" content="DAPSE 2013">
+<meta name="Producer" content="Conference Publishing Consulting">
+<meta name="Creator" content="LaTeX - 0ec42e58f119a1d7e42ff96bf6be67">
+<meta name="ModDate" content="D:20130423113708+02&#39;00&#39;">
+<meta name="Fullbanner" content="This is pdfTeX, Version 3.1415926-1.40.10-2.2 (TeX Live 2009/Debian) kpathsea version 5.0.0">
+<title>Building Statistical Language Models of Code</title>
+
+<table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="1"><b>Page 1</b></a></font></td></tr></tbody></table><font size="5" face="Times"><span style="font-size:33px;font-family:Times">
+<div style="position:absolute;top:261;left:115"><nobr>Building Statistical Language Models of Code</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:321;left:161"><nobr>Peter Schulam</nobr></div>
+<div style="position:absolute;top:341;left:100"><nobr>Language Technologies Institute</nobr></div>
+<div style="position:absolute;top:361;left:116"><nobr>Carnegie Mellon University</nobr></div>
+<div style="position:absolute;top:382;left:113"><nobr>pschulam@cs.cmu.edu</nobr></div>
+<div style="position:absolute;top:321;left:403"><nobr>Roni Rosenfeld</nobr></div>
+<div style="position:absolute;top:341;left:346"><nobr>Language Technologies Institute</nobr></div>
+<div style="position:absolute;top:361;left:362"><nobr>Carnegie Mellon University</nobr></div>
+<div style="position:absolute;top:382;left:378"><nobr>roni@cs.cmu.edu</nobr></div>
+<div style="position:absolute;top:321;left:633"><nobr>Premkumar Devanbu</nobr></div>
+<div style="position:absolute;top:341;left:612"><nobr>Dept. of Computer Science</nobr></div>
+<div style="position:absolute;top:361;left:593"><nobr>University of California at Davis</nobr></div>
+<div style="position:absolute;top:382;left:595"><nobr>devanbu@cs.ucdavis.edu</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:11px;font-family:Times">
+<div style="position:absolute;top:437;left:87"><nobr>Abstract—We present the Source Code Statistical Language</nobr></div>
+<div style="position:absolute;top:451;left:72"><nobr>Model data analysis pattern. Statistical language models have</nobr></div>
+<div style="position:absolute;top:466;left:72"><nobr>been an enabling tool for a wide array of important language</nobr></div>
+<div style="position:absolute;top:481;left:72"><nobr>technologies. Speech recognition, machine translation, and doc-</nobr></div>
+<div style="position:absolute;top:496;left:72"><nobr>ument summarization (to name a few) all rely on statistical</nobr></div>
+<div style="position:absolute;top:511;left:72"><nobr>language models to assign probability estimates to natural lan-</nobr></div>
+<div style="position:absolute;top:526;left:72"><nobr>guage utterances or sentences. In this data analysis pattern, we</nobr></div>
+<div style="position:absolute;top:541;left:72"><nobr>describe the process of building n-gram language models over</nobr></div>
+<div style="position:absolute;top:556;left:72"><nobr>software source files. We hope that by introducing the empirical</nobr></div>
+<div style="position:absolute;top:571;left:72"><nobr>software engineering community to best practices that have been</nobr></div>
+<div style="position:absolute;top:586;left:72"><nobr>established over the years in research for natural languages,</nobr></div>
+<div style="position:absolute;top:601;left:72"><nobr>statistical language models can become a tool that SE researchers</nobr></div>
+<div style="position:absolute;top:616;left:72"><nobr>are able to use to explore new research directions.</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:641;left:202"><nobr>I. I<font style="font-size:9px">NTRODUCTION</font></nobr></div>
+<div style="position:absolute;top:663;left:87"><nobr>When building language technologies it is useful to have</nobr></div>
+<div style="position:absolute;top:681;left:72"><nobr>some notion of the likelihood of a sentence in a particular</nobr></div>
+<div style="position:absolute;top:699;left:72"><nobr>context. For example, one is more likely to hear someone</nobr></div>
+<div style="position:absolute;top:717;left:72"><nobr>say “hi how are you” than “colorless green ideas sleep</nobr></div>
+<div style="position:absolute;top:735;left:72"><nobr>furiously.” Statistical language models formalize this notion of</nobr></div>
+<div style="position:absolute;top:753;left:72"><nobr>the likelihood of a natural language utterance or sentence by</nobr></div>
+<div style="position:absolute;top:771;left:72"><nobr>estimating probability distributions over sequences of words.</nobr></div>
+<div style="position:absolute;top:788;left:87"><nobr>Such probability distributions are used to help natural lan-</nobr></div>
+<div style="position:absolute;top:806;left:72"><nobr>guage processing systems to resolve some of the ambiguities</nobr></div>
+<div style="position:absolute;top:824;left:72"><nobr>that humans seem to handle almost effortlessly. For example,</nobr></div>
+<div style="position:absolute;top:842;left:72"><nobr>in speech recognition we wish to transcribe a spoken utterance</nobr></div>
+<div style="position:absolute;top:860;left:72"><nobr>by analyzing an acoustic signal and recovering the utterance.</nobr></div>
+<div style="position:absolute;top:878;left:72"><nobr>The sentences “I teach machines to recognize speech” and “I</nobr></div>
+<div style="position:absolute;top:896;left:72"><nobr>teach machines to wreck a nice beach” are two phonetically</nobr></div>
+<div style="position:absolute;top:914;left:72"><nobr>similar utterances. A language model is used to guide a speech</nobr></div>
+<div style="position:absolute;top:932;left:72"><nobr>recognition system to prefer the former over the latter, which,</nobr></div>
+<div style="position:absolute;top:950;left:72"><nobr>ignoring corner cases, is more likely to be what was actually</nobr></div>
+<div style="position:absolute;top:968;left:72"><nobr>spoken.</nobr></div>
+<div style="position:absolute;top:985;left:87"><nobr>The authors of [1] were the first to use statistical language</nobr></div>
+<div style="position:absolute;top:1003;left:72"><nobr>models of code, and envisioned their use in applications such</nobr></div>
+<div style="position:absolute;top:1021;left:72"><nobr>as:</nobr></div>
+<div style="position:absolute;top:1047;left:72"><nobr>A. Completion Tools</nobr></div>
+<div style="position:absolute;top:1069;left:87"><nobr>Language models have already been used for simple token-</nobr></div>
+<div style="position:absolute;top:1087;left:72"><nobr>level completions; but with models that use syntax, more</nobr></div>
+<div style="position:absolute;top:1105;left:72"><nobr>advanced suggestions are possible: e.g., suggesting try-catch</nobr></div>
+<div style="position:absolute;top:1123;left:72"><nobr>blocks around risky method calls, or while loops to follow</nobr></div>
+<div style="position:absolute;top:1141;left:72"><nobr>when container datastructures become available in scope.</nobr></div>
+<div style="position:absolute;top:1159;left:72"><nobr>Such suggestions could take advantage of both current scope</nobr></div>
+<div style="position:absolute;top:1177;left:72"><nobr>information and statistics gathered elsewhere.</nobr></div>
+<div style="position:absolute;top:1203;left:72"><nobr>B. Cross-language Models</nobr></div>
+<div style="position:absolute;top:1225;left:87"><nobr>Cross-language information retrieval and translation meth-</nobr></div>
+<div style="position:absolute;top:1243;left:72"><nobr>ods could gather useful statistics from aligned corpora of</nobr></div>
+<div style="position:absolute;top:436;left:466"><nobr>code and natural language. (e.g. stackoverflow comments with</nobr></div>
+<div style="position:absolute;top:454;left:466"><nobr>embedded code, code with proximate comments, changelogs</nobr></div>
+<div style="position:absolute;top:471;left:466"><nobr>with associated code additions, etc). Such statistics could be</nobr></div>
+<div style="position:absolute;top:489;left:466"><nobr>used for code summarization (producing natural language text</nobr></div>
+<div style="position:absolute;top:507;left:466"><nobr>given english) or code retrieval from english descipriptions.</nobr></div>
+<div style="position:absolute;top:540;left:466"><nobr>C. Search-based Software Engineering</nobr></div>
+<div style="position:absolute;top:564;left:481"><nobr>SBSE methods for code synthesis metaheuristically seek [6]</nobr></div>
+<div style="position:absolute;top:582;left:466"><nobr>relevant, needed code within a large search space, often gen-</nobr></div>
+<div style="position:absolute;top:600;left:466"><nobr>erated by genetic methods. We believe that language models</nobr></div>
+<div style="position:absolute;top:618;left:466"><nobr>can provide a useful way to organize this search space, for</nobr></div>
+<div style="position:absolute;top:636;left:466"><nobr>example, by guiding the search towards code that is more</nobr></div>
+<div style="position:absolute;top:654;left:466"><nobr>“like” the other, correct code.</nobr></div>
+<div style="position:absolute;top:672;left:481"><nobr>More generally, the ability to build probabilistic models of</nobr></div>
+<div style="position:absolute;top:690;left:466"><nobr>source files may be useful when designing rich models of</nobr></div>
+<div style="position:absolute;top:708;left:466"><nobr>the software engineering process. For example, probabilistic</nobr></div>
+<div style="position:absolute;top:726;left:466"><nobr>graphical models are frameworks for representing complex</nobr></div>
+<div style="position:absolute;top:744;left:466"><nobr>distributions over many random variables. Such models enable</nobr></div>
+<div style="position:absolute;top:762;left:466"><nobr>principled inference over unobserved variables conditioned</nobr></div>
+<div style="position:absolute;top:780;left:466"><nobr>on observed variables. Probabilistic models of source files</nobr></div>
+<div style="position:absolute;top:798;left:466"><nobr>allow code to be treated as random variables within the</nobr></div>
+<div style="position:absolute;top:816;left:466"><nobr>graphical model framework, which can then be used to predict</nobr></div>
+<div style="position:absolute;top:834;left:466"><nobr>unobserved quantities of interest (e.g. the author of a file).</nobr></div>
+<div style="position:absolute;top:866;left:514"><nobr>II. B<font style="font-size:9px">UILDING </font>n-<font style="font-size:9px">GRAM </font>L<font style="font-size:9px">ANGUAGE </font>M<font style="font-size:9px">ODELS</font></nobr></div>
+<div style="position:absolute;top:892;left:481"><nobr>We write the probability of a sequence of tokens as</nobr></div>
+<div style="position:absolute;top:909;left:466"><nobr>p(w<font style="font-size:8px">1</font>,w<font style="font-size:8px">2</font>,...,w<font style="font-size:8px">n</font>) = p(s), where a token w<font style="font-size:8px">i </font>is a member</nobr></div>
+<div style="position:absolute;top:928;left:466"><nobr>of a predefined vocabulary V. Naively, we can estimate a</nobr></div>
+<div style="position:absolute;top:945;left:466"><nobr>distribution over all sequences of length n by creating an</nobr></div>
+<div style="position:absolute;top:963;left:466"><nobr>exponentially large table of |V |<font style="font-size:8px">n </font>probabilities. Treating this</nobr></div>
+<div style="position:absolute;top:981;left:466"><nobr>sequence as a sequence of random variables, however, we can</nobr></div>
+<div style="position:absolute;top:999;left:466"><nobr>rewrite the joint distribution using the chain rule of probability</nobr></div>
+<div style="position:absolute;top:1048;left:476"><nobr>p(w<font style="font-size:8px">1</font>,w<font style="font-size:8px">2</font>,...,w<font style="font-size:8px">n</font>) =</nobr></div>
+<div style="position:absolute;top:1070;left:507"><nobr>p(w<font style="font-size:8px">1</font>)p(w<font style="font-size:8px">2</font>|w<font style="font-size:8px">1</font>)p(w<font style="font-size:8px">3</font>|w<font style="font-size:8px">1</font>,w<font style="font-size:8px">2</font>) ...p(w<font style="font-size:8px">n</font>|w<font style="font-size:8px">1</font>,...,w<font style="font-size:8px">n−1</font>)</nobr></div>
+<div style="position:absolute;top:1088;left:826"><nobr>(1)</nobr></div>
+<div style="position:absolute;top:1117;left:481"><nobr>The resulting conditional distributions still have a consider-</nobr></div>
+<div style="position:absolute;top:1135;left:466"><nobr>able number of parameters, especially for large n where we</nobr></div>
+<div style="position:absolute;top:1153;left:466"><nobr>must estimate a distribution over all w ∈ V for each potential</nobr></div>
+<div style="position:absolute;top:1171;left:466"><nobr>history of size n−1. We can, however, approximate each term</nobr></div>
+<div style="position:absolute;top:1188;left:466"><nobr>in equation 1 by making a Markov assumption</nobr></div>
+<div style="position:absolute;top:1237;left:517"><nobr>p(w<font style="font-size:8px">i</font>|w<font style="font-size:8px">1</font>,...,w<font style="font-size:8px">i−1</font>) ≈ p(w<font style="font-size:8px">i</font>|w<font style="font-size:8px">i−k</font>,...,w<font style="font-size:8px">i−1</font>)</nobr></div>
+<div style="position:absolute;top:1237;left:826"><nobr>(2)</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:11px;font-family:Times">
+<div style="position:absolute;top:1307;left:102"><nobr>978-1-4673-6296-2/13/$31.00 c 2013 IEEE</nobr></div>
+<div style="position:absolute;top:1307;left:551"><nobr>DAPSE 2013, San Francisco, CA, USA</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:1301;left:455"><nobr>1</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:1363;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="2"><b>Page 2</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:1444;left:87"><nobr>Using this approximation, we only need to estimate</nobr></div>
+<div style="position:absolute;top:1462;left:72"><nobr>O(|V|<font style="font-size:8px">k+1</font>) parameters, which can be a significant reduction.</nobr></div>
+<div style="position:absolute;top:1480;left:72"><nobr>Given a corpus of sentences (or, more generally, any sequence</nobr></div>
+<div style="position:absolute;top:1498;left:72"><nobr>of discrete tokens), we can use maximum likelihood estimation</nobr></div>
+<div style="position:absolute;top:1516;left:72"><nobr>to estimate the conditional probabilities:</nobr></div>
+<div style="position:absolute;top:1567;left:109"><nobr>p<font style="font-size:8px">MLE</font>(w<font style="font-size:8px">i</font>|w<font style="font-size:8px">i−k</font>,...,w<font style="font-size:8px">i−1</font>) =</nobr></div>
+<div style="position:absolute;top:1557;left:304"><nobr>c(w<font style="font-size:8px">i−k</font>,...,w<font style="font-size:8px">i</font>)</nobr></div>
+<div style="position:absolute;top:1577;left:296"><nobr>c(w<font style="font-size:8px">i−k</font>,...,w<font style="font-size:8px">i−1</font>)</nobr></div>
+<div style="position:absolute;top:1567;left:431"><nobr>(3)</nobr></div>
+<div style="position:absolute;top:1604;left:87"><nobr>Where c(·) is the number of times we observed that partic-</nobr></div>
+<div style="position:absolute;top:1622;left:72"><nobr>ular sequence of words in our training data. In practice, the</nobr></div>
+<div style="position:absolute;top:1640;left:72"><nobr>maximum likelihood estimate severely overfits. Most language</nobr></div>
+<div style="position:absolute;top:1658;left:72"><nobr>modeling tools offer several useful smoothing options, how-</nobr></div>
+<div style="position:absolute;top:1676;left:72"><nobr>ever, that can be used to improve the probability of unseen</nobr></div>
+<div style="position:absolute;top:1694;left:72"><nobr>data. In Section II-E we will say a bit more about this.</nobr></div>
+<div style="position:absolute;top:1724;left:72"><nobr>A. Token Normalization</nobr></div>
+<div style="position:absolute;top:1748;left:87"><nobr>It is important to first carefully define the type of data</nobr></div>
+<div style="position:absolute;top:1766;left:72"><nobr>that is used when building language models. When modeling</nobr></div>
+<div style="position:absolute;top:1784;left:72"><nobr>human language, we often use a sentence as the logical unit</nobr></div>
+<div style="position:absolute;top:1802;left:72"><nobr>of token sequences. In programming language text, we could</nobr></div>
+<div style="position:absolute;top:1820;left:72"><nobr>use statements and expressions, or we could view an entire</nobr></div>
+<div style="position:absolute;top:1838;left:72"><nobr>file as a single unit. In our work, we have chosen to use entire</nobr></div>
+<div style="position:absolute;top:1856;left:72"><nobr>source files. This decision is not critical, and can be changed</nobr></div>
+<div style="position:absolute;top:1874;left:72"><nobr>depending on the purpose of the model (e.g., we could instead</nobr></div>
+<div style="position:absolute;top:1891;left:72"><nobr>choose to model statements within Java methods). With this in</nobr></div>
+<div style="position:absolute;top:1909;left:72"><nobr>mind, we define a corpus C to be a collection of logical units of</nobr></div>
+<div style="position:absolute;top:1927;left:72"><nobr>token sequences (source files in our case). We assume that each</nobr></div>
+<div style="position:absolute;top:1945;left:72"><nobr>source file has been tokenized. From a practical perspective,</nobr></div>
+<div style="position:absolute;top:1963;left:72"><nobr>this means that we may have a single text file containing the</nobr></div>
+<div style="position:absolute;top:1981;left:72"><nobr>space separated token sequence of a source file on each line.</nobr></div>
+<div style="position:absolute;top:1999;left:72"><nobr>This is a common data format for language modeling, and is</nobr></div>
+<div style="position:absolute;top:2017;left:72"><nobr>accepted by most language modeling toolkits.</nobr></div>
+<div style="position:absolute;top:2035;left:87"><nobr>An initial step that is important when beginning to build a</nobr></div>
+<div style="position:absolute;top:2053;left:72"><nobr>language model is to understand the types that are observed</nobr></div>
+<div style="position:absolute;top:2071;left:72"><nobr>in your corpus. In linguistics, a type is the abstract notion of</nobr></div>
+<div style="position:absolute;top:2089;left:72"><nobr>a word in a text, and the tokens are the concrete instantiations</nobr></div>
+<div style="position:absolute;top:2107;left:72"><nobr>of that word in a corpus. Operationally, this means that we</nobr></div>
+<div style="position:absolute;top:2125;left:72"><nobr>count the number of tokens of a particular type.</nobr></div>
+<div style="position:absolute;top:2143;left:87"><nobr>To explore the data, a useful technique is to use the tr</nobr></div>
+<div style="position:absolute;top:2161;left:72"><nobr>command line tool to translate all spaces to newlines in your</nobr></div>
+<div style="position:absolute;top:2179;left:72"><nobr>corpus file so that each token is on its own line. We can then</nobr></div>
+<div style="position:absolute;top:2197;left:72"><nobr>use sort and uniq to get a list of the types that are found</nobr></div>
+<div style="position:absolute;top:2215;left:72"><nobr>in the corpus. We can then use grep to filter out token types</nobr></div>
+<div style="position:absolute;top:2233;left:72"><nobr>that we expect to see (e.g., all alphabetic or all numeric), and</nobr></div>
+<div style="position:absolute;top:2251;left:72"><nobr>take note of any unusual types. This can be done iteratively to</nobr></div>
+<div style="position:absolute;top:2269;left:72"><nobr>get a feel for the data, and also to transform unusual types to</nobr></div>
+<div style="position:absolute;top:2287;left:72"><nobr>normalized forms (e.g., replace all punctuation with symbolic</nobr></div>
+<div style="position:absolute;top:2305;left:72"><nobr>equivalents such as == → EQUALEQUAL or replace any string</nobr></div>
+<div style="position:absolute;top:2322;left:72"><nobr>literals with a symbolic token).</nobr></div>
+<div style="position:absolute;top:2353;left:72"><nobr>B. Type Distribution and Type-Token Curve</nobr></div>
+<div style="position:absolute;top:2377;left:87"><nobr>Once we have an initial feel for the types that are in our</nobr></div>
+<div style="position:absolute;top:2395;left:72"><nobr>corpus, we want to know more about the frequency at which</nobr></div>
+<div style="position:absolute;top:2413;left:72"><nobr>they occur. This knowledge can be helpful later when deciding</nobr></div>
+<div style="position:absolute;top:2431;left:72"><nobr>which distribution smoothing method to use. For example, if</nobr></div>
+<div style="position:absolute;top:1444;left:466"><nobr>we find that there are very few rare types (i.e. most types</nobr></div>
+<div style="position:absolute;top:1462;left:466"><nobr>occur 3 or more times), then we may not need to use any</nobr></div>
+<div style="position:absolute;top:1480;left:466"><nobr>sophisticated smoothing algorithms. If, however, the counts are</nobr></div>
+<div style="position:absolute;top:1498;left:466"><nobr>heavily tailed (meaning that many types occur only once), then</nobr></div>
+<div style="position:absolute;top:1516;left:466"><nobr>smoothing is an important step in estimating a distribution. A</nobr></div>
+<div style="position:absolute;top:1534;left:466"><nobr>good way to do this is to again use tr to obtain a newline</nobr></div>
+<div style="position:absolute;top:1552;left:466"><nobr>separated list of all tokens, and use sort | uniq -c |</nobr></div>
+<div style="position:absolute;top:1571;left:466"><nobr>sort -nr -k1 to get a list of types sorted by frequency</nobr></div>
+<div style="position:absolute;top:1588;left:466"><nobr>(with the most frequent types at the top). Browsing the top</nobr></div>
+<div style="position:absolute;top:1606;left:466"><nobr>and bottom of this frequency file can be helpful to reinforce</nobr></div>
+<div style="position:absolute;top:1624;left:466"><nobr>any correct prior intuitions and also to discover any unusual</nobr></div>
+<div style="position:absolute;top:1642;left:466"><nobr>characteristics of the data.</nobr></div>
+<div style="position:absolute;top:1660;left:481"><nobr>It is also useful to understand the rate at which new types are</nobr></div>
+<div style="position:absolute;top:1678;left:466"><nobr>seen in the corpus because it will help us to choose a suitable</nobr></div>
+<div style="position:absolute;top:1696;left:466"><nobr>vocabulary V. In other words, imagine we are reading along</nobr></div>
+<div style="position:absolute;top:1714;left:466"><nobr>each line of our corpus text file and we start with an initially</nobr></div>
+<div style="position:absolute;top:1731;left:466"><nobr>empty vocabulary. As we read along, every time that we read</nobr></div>
+<div style="position:absolute;top:1749;left:466"><nobr>a new token, we check if we’ve already recorded it as a type in</nobr></div>
+<div style="position:absolute;top:1767;left:466"><nobr>our vocabulary. If we haven’t, we add it and move on. Plotting</nobr></div>
+<div style="position:absolute;top:1785;left:466"><nobr>a type-token curve gives an idea of how frequently we will be</nobr></div>
+<div style="position:absolute;top:1803;left:466"><nobr>adding new types to our vocabulary after seeing M tokens. We</nobr></div>
+<div style="position:absolute;top:1821;left:466"><nobr>can construct the type-token curve by writing a small script to</nobr></div>
+<div style="position:absolute;top:1839;left:466"><nobr>read a newline separated file of all tokens, and at each token</nobr></div>
+<div style="position:absolute;top:1857;left:466"><nobr>print out the number of tokens it has read and the number</nobr></div>
+<div style="position:absolute;top:1875;left:466"><nobr>of types it has seen. Plotting the number of observed types</nobr></div>
+<div style="position:absolute;top:1893;left:466"><nobr>against the number of tokens read by the script will often give</nobr></div>
+<div style="position:absolute;top:1911;left:466"><nobr>a logarithmically shaped graph in natural language modeling.</nobr></div>
+<div style="position:absolute;top:1929;left:466"><nobr>In code, however, we have found that the vocabulary continues</nobr></div>
+<div style="position:absolute;top:1947;left:466"><nobr>to grow. This makes sense since programmers introduce new</nobr></div>
+<div style="position:absolute;top:1965;left:466"><nobr>identifier names constantly, and is a characteristic of code that</nobr></div>
+<div style="position:absolute;top:1983;left:466"><nobr>makes choosing a suitable vocabulary more difficult than in</nobr></div>
+<div style="position:absolute;top:2000;left:466"><nobr>natural language modeling.</nobr></div>
+<div style="position:absolute;top:2031;left:466"><nobr>C. Splitting the Data</nobr></div>
+<div style="position:absolute;top:2054;left:481"><nobr>Once we have an initial feel for the data, it is very important</nobr></div>
+<div style="position:absolute;top:2072;left:466"><nobr>to split the corpus into three distinct sets so that we can</nobr></div>
+<div style="position:absolute;top:2090;left:466"><nobr>evaluate our model on previously unseen data. The training set</nobr></div>
+<div style="position:absolute;top:2108;left:466"><nobr>is used to estimate the n-gram parameters, the development</nobr></div>
+<div style="position:absolute;top:2126;left:466"><nobr>set is used to tune any other parameters (such as the size of</nobr></div>
+<div style="position:absolute;top:2144;left:466"><nobr>the context k that will be used), and the test set is used to</nobr></div>
+<div style="position:absolute;top:2162;left:466"><nobr>evaluate your model and report final numbers. When building</nobr></div>
+<div style="position:absolute;top:2180;left:466"><nobr>your models it is okay to look at training and development</nobr></div>
+<div style="position:absolute;top:2198;left:466"><nobr>data, but it is good practice to never run experiments on or</nobr></div>
+<div style="position:absolute;top:2216;left:466"><nobr>observe the test set, which should be used only to take the final</nobr></div>
+<div style="position:absolute;top:2233;left:466"><nobr>evaluation metrics of your model. Intuitively, we are trying to</nobr></div>
+<div style="position:absolute;top:2251;left:466"><nobr>simulate a real use case of our model by evaluating the model’s</nobr></div>
+<div style="position:absolute;top:2269;left:466"><nobr>effectiveness on data that it has never before seen.</nobr></div>
+<div style="position:absolute;top:2300;left:466"><nobr>D. Defining the Vocabulary</nobr></div>
+<div style="position:absolute;top:2323;left:481"><nobr>Another important consideration is the vocabulary V of your</nobr></div>
+<div style="position:absolute;top:2341;left:466"><nobr>model since two different language models can only be fairly</nobr></div>
+<div style="position:absolute;top:2359;left:466"><nobr>compared if they are both defined over the same vocabulary.</nobr></div>
+<div style="position:absolute;top:2377;left:466"><nobr>This is an especially tricky issue when modeling code because</nobr></div>
+<div style="position:absolute;top:2395;left:466"><nobr>a fixed vocabulary will almost certainly not contain many of</nobr></div>
+<div style="position:absolute;top:2413;left:466"><nobr>the identifiers observed in the source files used for testing.</nobr></div>
+<div style="position:absolute;top:2431;left:466"><nobr>In our experiments, we have defined the vocabulary to be all</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:2489;left:455"><nobr>2</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:2551;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="3"><b>Page 3</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:2632;left:72"><nobr>types that are observed in the training data plus an additional</nobr></div>
+<div style="position:absolute;top:2650;left:72"><nobr>dummy type UNK that we use to absorb all out of vocabulary</nobr></div>
+<div style="position:absolute;top:2668;left:72"><nobr>(OOV) types that we see in the test data. When estimating</nobr></div>
+<div style="position:absolute;top:2686;left:72"><nobr>the parameters of our model we treat UNK just like any other</nobr></div>
+<div style="position:absolute;top:2704;left:72"><nobr>type, and at test time, if we must predict the probability of an</nobr></div>
+<div style="position:absolute;top:2722;left:72"><nobr>OOV type we simply use the probability of the UNK type in</nobr></div>
+<div style="position:absolute;top:2740;left:72"><nobr>that context.</nobr></div>
+<div style="position:absolute;top:2769;left:72"><nobr>E. Training a Model</nobr></div>
+<div style="position:absolute;top:2791;left:87"><nobr>Once all preprocessing has been completed, the</nobr></div>
+<div style="position:absolute;top:2809;left:72"><nobr>train/dev/test sets have been specified, and the vocabulary</nobr></div>
+<div style="position:absolute;top:2827;left:72"><nobr>has been decided, we can begin to train n-gram language</nobr></div>
+<div style="position:absolute;top:2845;left:72"><nobr>models. A well-known toolkit is the SRI Language Modeling</nobr></div>
+<div style="position:absolute;top:2863;left:72"><nobr>Toolkit [2]. The toolkit can be downloaded for free<font style="font-size:8px">1</font>, and can</nobr></div>
+<div style="position:absolute;top:2881;left:72"><nobr>be compiled on most unix-like systems. The toolkit is made</nobr></div>
+<div style="position:absolute;top:2899;left:72"><nobr>up of a collection of command line tools that can be used to</nobr></div>
+<div style="position:absolute;top:2917;left:72"><nobr>train and evaluate language models.</nobr></div>
+<div style="position:absolute;top:2935;left:87"><nobr>Assuming that our training data is in a file</nobr></div>
+<div style="position:absolute;top:2954;left:72"><nobr>corpus-train.txt, with each line containing the</nobr></div>
+<div style="position:absolute;top:2971;left:72"><nobr>space-separated sequence of tokens from a source file in our</nobr></div>
+<div style="position:absolute;top:2989;left:72"><nobr>corpus, we can run the following command to train a simple</nobr></div>
+<div style="position:absolute;top:3007;left:72"><nobr>trigram language model (i.e. k = 2 in the description of</nobr></div>
+<div style="position:absolute;top:3024;left:72"><nobr>n-gram models above):</nobr></div>
+<div style="position:absolute;top:3052;left:72"><nobr>ngram-count -text corpus-train.txt \</nobr></div>
+<div style="position:absolute;top:3070;left:108"><nobr>-order 3 -write-vocab vocab.txt \</nobr></div>
+<div style="position:absolute;top:3088;left:108"><nobr>-unk -lm ngram.lm</nobr></div>
+<div style="position:absolute;top:3114;left:87"><nobr>The command will produce a file vocab.txt containing</nobr></div>
+<div style="position:absolute;top:3132;left:72"><nobr>the list of unique types in our training data. Note that this</nobr></div>
+<div style="position:absolute;top:3150;left:72"><nobr>is only one way to select a vocabulary, and what we have</nobr></div>
+<div style="position:absolute;top:3168;left:72"><nobr>done here may not always be appropriate. The -unk option</nobr></div>
+<div style="position:absolute;top:3186;left:72"><nobr>specifies that we would like to include an unknown token in</nobr></div>
+<div style="position:absolute;top:3204;left:72"><nobr>our language model, and estimate probabilities for it. Finally,</nobr></div>
+<div style="position:absolute;top:3222;left:72"><nobr>the language model is written to ngram.lm.</nobr></div>
+<div style="position:absolute;top:3240;left:87"><nobr>Earlier, we briefly mentioned smoothing of maximum like-</nobr></div>
+<div style="position:absolute;top:3258;left:72"><nobr>lihood estimates in an n-gram model. By default, SRILM will</nobr></div>
+<div style="position:absolute;top:3276;left:72"><nobr>use Good-Turing discounting[3] to smooth the raw empirical</nobr></div>
+<div style="position:absolute;top:3294;left:72"><nobr>counts. It will also create back-off weights using Katz’s back-</nobr></div>
+<div style="position:absolute;top:3312;left:72"><nobr>off model[4]. Intuitively, backing off means that the model will</nobr></div>
+<div style="position:absolute;top:3330;left:72"><nobr>consult lower order n-grams if a higher order n-gram does not</nobr></div>
+<div style="position:absolute;top:3348;left:72"><nobr>have enough data to be confident in its estimate. For additional</nobr></div>
+<div style="position:absolute;top:3365;left:72"><nobr>information on smoothing techniques, an excellent empirical</nobr></div>
+<div style="position:absolute;top:3383;left:72"><nobr>comparison was published by Chen and Goodman[5]. Practical</nobr></div>
+<div style="position:absolute;top:3401;left:72"><nobr>information regarding smoothing options in SRILM can be</nobr></div>
+<div style="position:absolute;top:3419;left:72"><nobr>found in the man page ngram-discount that is included</nobr></div>
+<div style="position:absolute;top:3437;left:72"><nobr>with the SRILM source.</nobr></div>
+<div style="position:absolute;top:3466;left:174"><nobr>III. E<font style="font-size:9px">VALUATING </font>M<font style="font-size:9px">ODELS</font></nobr></div>
+<div style="position:absolute;top:3489;left:87"><nobr>In information theory, the theoretical quantity used to char-</nobr></div>
+<div style="position:absolute;top:3507;left:72"><nobr>acterize the difference between a true distribution P<font style="font-size:8px">a </font>and a</nobr></div>
+<div style="position:absolute;top:3525;left:72"><nobr>hypothesized distribution P<font style="font-size:8px">b </font>is the cross entropy:</nobr></div>
+<div style="position:absolute;top:3572;left:149"><nobr>CE(P<font style="font-size:8px">a</font>,P<font style="font-size:8px">b</font>) =</nobr></div>
+<div style="position:absolute;top:3568;left:244"><nobr>∑</nobr></div>
+</span></font>
+<font size="2" face="Times"><span style="font-size:8px;font-family:Times">
+<div style="position:absolute;top:3593;left:251"><nobr>x</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:3572;left:268"><nobr>p<font style="font-size:8px">a</font>(x) log<font style="font-size:8px">2</font></nobr></div>
+<div style="position:absolute;top:3562;left:349"><nobr>1</nobr></div>
+<div style="position:absolute;top:3583;left:336"><nobr>p<font style="font-size:8px">b</font>(x)</nobr></div>
+<div style="position:absolute;top:3573;left:431"><nobr>(4)</nobr></div>
+</span></font>
+<font size="2" face="Times"><span style="font-size:6px;font-family:Times">
+<div style="position:absolute;top:3618;left:84"><nobr>1<font style="font-size:9px">http://www.speech.sri.com/projects/srilm/</font></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:2632;left:481"><nobr>This is a common way to evaluate language models, but,</nobr></div>
+<div style="position:absolute;top:2650;left:466"><nobr>in practice, we do not know the true distribution P<font style="font-size:8px">a </font>and must</nobr></div>
+<div style="position:absolute;top:2668;left:466"><nobr>use an empirical estimate of the quantity:</nobr></div>
+<div style="position:absolute;top:2712;left:561"><nobr>ˆ</nobr></div>
+<div style="position:absolute;top:2716;left:553"><nobr>CE(P<font style="font-size:8px">a</font>,P<font style="font-size:8px">b</font>) =</nobr></div>
+<div style="position:absolute;top:2706;left:654"><nobr>1</nobr></div>
+<div style="position:absolute;top:2725;left:649"><nobr>|C|</nobr></div>
+<div style="position:absolute;top:2711;left:670"><nobr>∑</nobr></div>
+</span></font>
+<font size="2" face="Times"><span style="font-size:8px;font-family:Times">
+<div style="position:absolute;top:2737;left:671"><nobr>t∈C</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:2716;left:694"><nobr>log<font style="font-size:8px">2</font></nobr></div>
+<div style="position:absolute;top:2706;left:736"><nobr>1</nobr></div>
+<div style="position:absolute;top:2726;left:724"><nobr>p<font style="font-size:8px">b</font>(t)</nobr></div>
+<div style="position:absolute;top:2716;left:826"><nobr>(5)</nobr></div>
+<div style="position:absolute;top:2756;left:481"><nobr>Where the summation in equation 5 is over all tokens t in</nobr></div>
+<div style="position:absolute;top:2774;left:466"><nobr>the corpus and P<font style="font-size:8px">b </font>is our language model. In words, this is the</nobr></div>
+<div style="position:absolute;top:2792;left:466"><nobr>average negative log likelihood over all tokens in the corpus.</nobr></div>
+<div style="position:absolute;top:2810;left:481"><nobr>A related measure of quality is the perplexity of a model,</nobr></div>
+<div style="position:absolute;top:2829;left:466"><nobr>which is defined to be 2</nobr></div>
+</span></font>
+<font size="2" face="Times"><span style="font-size:8px;font-family:Times">
+<div style="position:absolute;top:2824;left:633"><nobr>ˆ</nobr></div>
+<div style="position:absolute;top:2826;left:627"><nobr>CE <font style="font-size:12px">(2 raised to the power of the</font></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:12px;font-family:Times">
+<div style="position:absolute;top:2847;left:466"><nobr>empirical cross entropy).</nobr></div>
+<div style="position:absolute;top:2865;left:481"><nobr>To evaluate the model ngram.lm that we have trained</nobr></div>
+<div style="position:absolute;top:2883;left:466"><nobr>above, we can use the ngram tool that comes with SRILM.</nobr></div>
+<div style="position:absolute;top:2900;left:466"><nobr>Assuming that we want to train on our development corpus</nobr></div>
+<div style="position:absolute;top:2918;left:466"><nobr>and that it is in a file corpus-dev.txt, we can run the</nobr></div>
+<div style="position:absolute;top:2936;left:466"><nobr>following command:</nobr></div>
+<div style="position:absolute;top:2964;left:466"><nobr>ngram -ppl corpus-dev.txt -order 3 \</nobr></div>
+<div style="position:absolute;top:2982;left:502"><nobr>-vocab vocab.txt -unk</nobr></div>
+<div style="position:absolute;top:3008;left:481"><nobr>This command will output a summary of the model’s</nobr></div>
+<div style="position:absolute;top:3026;left:466"><nobr>performance on the corpus. The most important metric is the</nobr></div>
+<div style="position:absolute;top:3044;left:466"><nobr>log likelihood. If a model assigns a higher probability to a valid</nobr></div>
+<div style="position:absolute;top:3062;left:466"><nobr>source file than another does, we can conclude that the model</nobr></div>
+<div style="position:absolute;top:3080;left:466"><nobr>better captures generalized regularities of code. We hope, then,</nobr></div>
+<div style="position:absolute;top:3098;left:466"><nobr>that the model will be more effective in the target application.</nobr></div>
+<div style="position:absolute;top:3116;left:466"><nobr>It is important to note, though, that log likelihood is a surrogate</nobr></div>
+<div style="position:absolute;top:3134;left:466"><nobr>objective function. In search-based software engineering, for</nobr></div>
+<div style="position:absolute;top:3152;left:466"><nobr>example, a model that achieves higher log likelihood than</nobr></div>
+<div style="position:absolute;top:3169;left:466"><nobr>another may not necessarily perform better when retrieving</nobr></div>
+<div style="position:absolute;top:3187;left:466"><nobr>snippets of code similar to what a developer is writing. Indeed,</nobr></div>
+<div style="position:absolute;top:3205;left:466"><nobr>the trade off between intrinsic and extrinsic evaluation is</nobr></div>
+<div style="position:absolute;top:3223;left:466"><nobr>an issue that is still being addressed in natural language</nobr></div>
+<div style="position:absolute;top:3241;left:466"><nobr>processing. It is important to understand this distinction when</nobr></div>
+<div style="position:absolute;top:3259;left:466"><nobr>training language models for a particular application.</nobr></div>
+<div style="position:absolute;top:3287;left:613"><nobr>R<font style="font-size:9px">EFERENCES</font></nobr></div>
+</span></font>
+<font size="2" face="Times"><span style="font-size:9px;font-family:Times">
+<div style="position:absolute;top:3311;left:466"><nobr>[1] A. Hindle, E. Barr, Z. Su, M. Gabel, and P. Devanbu, “On the naturalness</nobr></div>
+<div style="position:absolute;top:3325;left:488"><nobr>of software,” in 34th International Conference on Software Engineering.</nobr></div>
+<div style="position:absolute;top:3338;left:488"><nobr>IEEE, 2012, pp. 837–847.</nobr></div>
+<div style="position:absolute;top:3352;left:466"><nobr>[2] A. Stolcke et al., “SRILM-an extensible language modeling toolkit,”</nobr></div>
+<div style="position:absolute;top:3365;left:488"><nobr>in Proceedings of the international conference on spoken language</nobr></div>
+<div style="position:absolute;top:3379;left:488"><nobr>processing, vol. 2, 2002, pp. 901–904.</nobr></div>
+<div style="position:absolute;top:3392;left:466"><nobr>[3] I. Good, “The population frequencies of species and the estimation of</nobr></div>
+<div style="position:absolute;top:3405;left:488"><nobr>population parameters,” Biometrika, vol. 40, no. 3-4, pp. 237–264, 1953.</nobr></div>
+<div style="position:absolute;top:3419;left:466"><nobr>[4] S. Katz, “Estimation of probabilities from sparse data for the language</nobr></div>
+<div style="position:absolute;top:3432;left:488"><nobr>model component of a speech recognizer,” Acoustics, Speech and Signal</nobr></div>
+<div style="position:absolute;top:3446;left:488"><nobr>Processing, IEEE Transactions on, vol. 35, no. 3, pp. 400–401, 1987.</nobr></div>
+<div style="position:absolute;top:3459;left:466"><nobr>[5] S. Chen and J. Goodman, “An empirical study of smoothing techniques</nobr></div>
+<div style="position:absolute;top:3473;left:488"><nobr>for language modeling,” in Proceedings of the 34th annual meeting on As-</nobr></div>
+<div style="position:absolute;top:3486;left:488"><nobr>sociation for Computational Linguistics. Association for Computational</nobr></div>
+<div style="position:absolute;top:3500;left:488"><nobr>Linguistics, 1996, pp. 310–318.</nobr></div>
+<div style="position:absolute;top:3513;left:466"><nobr>[6] W. Weimer, T. Nguyen, C. Le Goues, and S. Forrest, “Automatically</nobr></div>
+<div style="position:absolute;top:3527;left:488"><nobr>finding patches using genetic programming,” in Proceedings of the 31st</nobr></div>
+<div style="position:absolute;top:3540;left:488"><nobr>International Conference on Software Engineering.</nobr></div>
+<div style="position:absolute;top:3540;left:763"><nobr>IEEE Computer</nobr></div>
+<div style="position:absolute;top:3553;left:488"><nobr>Society, 2009, pp. 364–374.</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:3677;left:455"><nobr>3</nobr></div>
+</span></font>
+
+
+</div></body></html>
