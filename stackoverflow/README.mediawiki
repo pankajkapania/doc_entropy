@@ -39,14 +39,14 @@ Directory structure/ Setup required for evaluateNgram.pl
 
 
 
-* File Splitter
+== File Splitter ==
 It is a utility written in java that randomly splits the data over 10 different files of equal sizes. It has 1 java file, 2 directories data and splitted_files.
 
-*Data Setup required before we run this utility.
+#Data Setup required before we run this utility.
  
 Place the data file into data directory.
 
-*Run:
+#Run:
 
 Java FileSplitter <data_file_name>
 
@@ -54,4 +54,4 @@ e.g.
 
 Java FileSplitter android.in
 
-*After the successful run of this utility splitted files will be placed under splitted_files directory.
+#After the successful run of this utility splitted files will be placed under splitted_files directory.
