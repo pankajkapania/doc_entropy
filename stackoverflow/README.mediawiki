@@ -12,14 +12,14 @@
 
 Directory structure/ Setup required for estimateNgram.pl
 
-1. Create following 10 directories.
+1. Create following 10 directories. Each directory corresponds to the n-gram folder that will be used to train language model for different order values of n.
   1-gram
   2-gram
   3-gram
    …
   9-gram
   10-gram
- 
+   
 2. Copy following 10 Data set directories under each n-gram folder created above. Each data set directory will have corpus files which will be used to train and validate data model.
   DS1
   DS2
