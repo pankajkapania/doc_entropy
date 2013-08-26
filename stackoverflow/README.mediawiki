@@ -1,25 +1,20 @@
-
+== token_so.pl ==
 ./token_so.pl <configfile>
 * run this to get all the posts from stackoverflow related that are in the clt table
 * new lines are removed from posts, but there is a black line between each post so that the end of one post is not considered in the > 1-gram of another post
 
+== token_so_ce.pl ==
 ./token_so_ce.pl <config_file>
 * pulls out the code elements based on their doc position and places a space between code elements and a new line between each post
 
-
+== estimateNgram.pl ==
 ./estimateNgram.pl
 * estimates an n-gram language model for first 10-gram order values e.g. 1-gram, 2-gram on given corpus.
 
 Directory structure/ Setup required for estimateNgram.pl
 
 * Create following 10 directories. Each directory corresponds to the n-gram folder that will be used to train language model for different order values of n. e.g. 1-gram, 2-gram, 3-gram … 9-gram, 10-gram.
-  1-gram
-  2-gram
-  3-gram
-   …
-  9-gram
-  10-gram
-   
+     
 * Copy following 10 Data set directories under each n-gram folder created above. Each data set directory will have corpus files which will be used to train and validate data model.
   DS1
   DS2
@@ -27,7 +22,10 @@ Directory structure/ Setup required for estimateNgram.pl
    …
   DS9
   DS10
+
 *Place estimateNgram.pl at the same level as n-gram directories described above.
+
+== evaluateNgram.pl ==
 
 . / evaluateNgram.pl
 * Evaluates the performance of an n-gram language model. It computes perplexity and cross entropy for different n-gram order values. Script can be easily configured for values of n.
@@ -39,13 +37,15 @@ Directory structure/ Setup required for evaluateNgram.pl
 
 
 
+
+
 == File Splitter ==
 It is a utility written in java that randomly splits the data over 10 different files of equal sizes. It has 1 java file, 2 directories data and splitted_files.
 
 1. Data Setup required before we run this utility
    Place the data file into data directory
 2. Run:
-   Java FileSplitter <data_file_name>
+   Java FileSplitter data_file_name
    e.g.
    Java FileSplitter android.in
 
