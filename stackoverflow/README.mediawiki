@@ -12,30 +12,19 @@
 
 Directory structure/ Setup required for estimateNgram.pl
 
-1. Create following 10 directories 
-1-gram
-2-gram
-3-gram
-  …
-9-gram
-10-gram
-2. Copy following 10 Data set directories under each n-gram folder created above.
+1. Create following 10 directories.
+  1-gram
+  2-gram
+  3-gram
+   …
+  9-gram
+  10-gram
+ 
+2. Copy following 10 Data set directories under each n-gram folder created above. Each data set directory will have corpus files which will be used to train and validate data model.
   DS1
   DS2
   DS3
    …
   DS9
   DS10
-3. Place estimateNgram.pl alongside n-gram directories. So ideally it should look like following.  
-drwxrwxr-x 12 pankaj_k pankaj_k   4096 Aug  8 20:21 1-gram
-drwxrwxr-x 12 pankaj_k pankaj_k   4096 Aug  8 20:22 2-gram
-drwxrwxr-x 12 pankaj_k pankaj_k   4096 Aug  8 20:22 3-gram
-drwxrwxr-x 12 pankaj_k pankaj_k   4096 Aug  8 20:22 4-gram
-drwxrwxr-x 12 pankaj_k pankaj_k   4096 Aug  8 20:22 5-gram
-drwxrwxr-x 12 pankaj_k pankaj_k   4096 Aug  8 20:22 6-gram
-drwxrwxr-x 12 pankaj_k pankaj_k   4096 Aug  8 20:22 7-gram
-drwxrwxr-x 12 pankaj_k pankaj_k   4096 Aug  8 20:22 8-gram
-drwxrwxr-x 12 pankaj_k pankaj_k   4096 Aug  8 20:22 9-gram
-drwxrwxr-x 12 pankaj_k pankaj_k   4096 Aug  8 20:22 10-gram
--rwxr-xr-x  1 pankaj_k pankaj_k   1562 Aug  8 20:36 evaluateNgram.pl
--rwxr-xr-x  1 pankaj_k pankaj_k    486 Aug  8 20:36 estimateNgram.pl
+3. Place estimateNgram.pl at the same level as n-gram directories described above.  
