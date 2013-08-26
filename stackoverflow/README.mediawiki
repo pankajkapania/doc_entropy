@@ -9,11 +9,11 @@
 
 == estimateNgram.pl ==
 ./estimateNgram.pl
-* estimates an n-gram language model for first 10-gram order values e.g. 1-gram, 2-gram on given corpus.
+* estimates an n-gram language model for first 10-gram order values e.g. 1-gram, 2-gram etc. on given corpus.
 
 Directory structure/ Setup required for estimateNgram.pl
 
-1.  Create following 10 directories. Each directory corresponds to the n-gram folder that will be used to train language model for different order values of n. e.g. 1-gram, 2-gram, 3-gram … 9-gram, 10-gram.
+1.  Create 10 directories based on the n-gram order values. Each directory corresponds to the n-gram folder that will be used to train language model for different order values of n. e.g. 1-gram, 2-gram, 3-gram … 9-gram, 10-gram.
      
 2.  Copy following 10 Data set directories under each n-gram folder created above. Each data set directory will have corpus files which will be used to train and validate data model.
   DS1
@@ -31,9 +31,8 @@ Directory structure/ Setup required for estimateNgram.pl
 * Evaluates the performance of an n-gram language model. It computes perplexity and cross entropy for different n-gram order values. Script can be easily configured for values of n.
 
 Directory structure/ Setup required for evaluateNgram.pl
-
-1.  Make sure estimateNgram.pl has been successfully executed.
-2.  Place evaluateNgram.pl alongside estimateNgram.pl.
+1.  Make sure estimateNgram.pl has been successfully executed
+2.  Place evaluateNgram.pl alongside estimateNgram.pl
 
 
 
