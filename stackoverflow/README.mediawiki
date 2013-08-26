@@ -13,9 +13,9 @@
 
 Directory structure/ Setup required for estimateNgram.pl
 
-* Create following 10 directories. Each directory corresponds to the n-gram folder that will be used to train language model for different order values of n. e.g. 1-gram, 2-gram, 3-gram … 9-gram, 10-gram.
+1.  Create following 10 directories. Each directory corresponds to the n-gram folder that will be used to train language model for different order values of n. e.g. 1-gram, 2-gram, 3-gram … 9-gram, 10-gram.
      
-* Copy following 10 Data set directories under each n-gram folder created above. Each data set directory will have corpus files which will be used to train and validate data model.
+2.  Copy following 10 Data set directories under each n-gram folder created above. Each data set directory will have corpus files which will be used to train and validate data model.
   DS1
   DS2
   DS3
@@ -23,7 +23,7 @@ Directory structure/ Setup required for estimateNgram.pl
   DS9
   DS10
 
-*Place estimateNgram.pl at the same level as n-gram directories described above.
+3. Place estimateNgram.pl at the same level as n-gram directories described above.
 
 == evaluateNgram.pl ==
 
@@ -32,8 +32,8 @@ Directory structure/ Setup required for estimateNgram.pl
 
 Directory structure/ Setup required for evaluateNgram.pl
 
-* Make sure estimateNgram.pl has been successfully executed.
-* Place evaluateNgram.pl alongside estimateNgram.pl.
+1.  Make sure estimateNgram.pl has been successfully executed.
+2.  Place evaluateNgram.pl alongside estimateNgram.pl.
 
 
 
